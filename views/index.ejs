@@ -1,0 +1,117 @@
+<%- include('partials/header') %>
+
+<div class="dashboard">
+    <div class="dashboard-header">
+        <h2>Online Presence Dashboard</h2>
+        <div class="online-count">
+            <span class="material-icons">people</span>
+            <span id="online-count">0</span> users online
+        </div>
+    </div>
+
+    <div class="dashboard-grid">
+        <!-- User Selection Panel -->
+        <div class="panel user-selection-panel">
+            <div class="panel-header">
+                <h3>Select User</h3>
+            </div>
+            <div class="panel-body">
+                <div class="form-group">
+                    <label for="user-select">Login as:</label>
+                    <select id="user-select" class="form-control">
+                        <option value="">-- Select a user --</option>
+                        <% users.forEach(user => { %>
+                            <option value="<%= user.id %>"><%= user.name %></option>
+                        <% }); %>
+                    </select>
+                </div>
+                <div class="button-group">
+                    <button id="connect-btn" class="btn btn-primary">Connect</button>
+                    <button id="disconnect-btn" class="btn btn-danger" disabled>Disconnect</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Status Control Panel -->
+        <div class="panel status-panel">
+            <div class="panel-header">
+                <h3>Your Status</h3>
+            </div>
+            <div class="panel-body">
+                <div class="status-controls">
+                    <button id="status-online-btn" class="btn btn-success status-btn" disabled>
+                        <span class="material-icons">check_circle</span> Set Online
+                    </button>
+                    <button id="status-offline-btn" class="btn btn-secondary status-btn" disabled>
+                        <span class="material-icons">cancel</span> Set Offline
+                    </button>
+                </div>
+                <div class="current-status">
+                    <p>Current status: <span id="current-status">Not connected</span></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- User Status Check Panel -->
+        <div class="panel user-check-panel">
+            <div class="panel-header">
+                <h3>Check User Status</h3>
+            </div>
+            <div class="panel-body">
+                <div class="form-group">
+                    <label for="check-user-select">Select user:</label>
+                    <select id="check-user-select" class="form-control" disabled>
+                        <option value="">-- Select a user --</option>
+                        <% users.forEach(user => { %>
+                            <option value="<%= user.id %>"><%= user.name %></option>
+                        <% }); %>
+                    </select>
+                </div>
+                <button id="check-status-btn" class="btn btn-info" disabled>
+                    <span class="material-icons">search</span> Check Status
+                </button>
+                <div id="status-result" class="status-result"></div>
+            </div>
+        </div>
+
+        <!-- Online Users Panel -->
+        <div class="panel users-panel">
+            <div class="panel-header">
+                <h3>All Users</h3>
+                <button id="refresh-users-btn" class="btn btn-sm btn-outline" disabled>
+                    <span class="material-icons">refresh</span>
+                </button>
+            </div>
+            <div class="panel-body">
+                <ul id="users-list" class="users-list">
+                    <li class="user-item placeholder">No data available</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Activity Log Panel -->
+<div class="panel activity-panel">
+    <div class="panel-header">
+        <h3>Activity Log</h3>
+        <button id="clear-log-btn" class="btn btn-sm btn-outline">
+            <span class="material-icons">clear_all</span>
+        </button>
+    </div>
+    <div class="panel-body">
+        <div id="activity-log" class="activity-log">
+            <div class="log-entry system">
+                <span class="timestamp"><%= new Date().toLocaleTimeString() %></span>
+                <span class="message">System initialized. Please connect to start.</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- WebSocket Port for JavaScript -->
+<script>
+    const WS_PORT = <%= wsPort %>;
+</script>
+
+<%- include('partials/footer') %>

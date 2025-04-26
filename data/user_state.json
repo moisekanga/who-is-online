@@ -1,0 +1,14 @@
+{
+  "1": {
+    "userId": 1,
+    "connectionId": "conn-d2df399d-2849-4c20-bdcf-1cb438ff0a3b",
+    "status": "online",
+    "lastSeen": null
+  },
+  "2": {
+    "userId": 2,
+    "connectionId": "conn-db7418fd-233e-4698-8f2a-ea34c9d579de",
+    "status": "online",
+    "lastSeen": null
+  }
+}
